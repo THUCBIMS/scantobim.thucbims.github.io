@@ -7,6 +7,7 @@
     <title>ModelFun: AI-driven openBIM modeling from point cloud</title>
     <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
 	  <style>
 		  .portfolio > div {
@@ -62,7 +63,7 @@
           <p></p>
         </div>
         <div class="row">
-          <div class="col-md-2 col-12 text-center">
+          <div class="col-md-1 col-12 text-center">
           </div>
           <div class="col-md-2 col-12 text-center">
             <select id="select_model" onChange="select_model_changed()" class="form-select" aria-label="Please Select Model:">
@@ -71,7 +72,7 @@
               <option value="2">parkinglot-1.ply</option>
               <option value="3">school-1.ply</option>
               <option value="4">office-building-2.ply</option>
-              <option value="5">house1.ply</option>
+              <option value="5">residence1.ply</option>
             </select>
           </div>
           <div class="col-md-1 col-12 text-center">
@@ -96,22 +97,52 @@
               <option value="4">as-built IFC model</option>
             </select>
           </div>
-          <div class="col-md-2 col-12 text-center">
+          <div class="col-md-1 col-12 text-center">
           </div>
-          <!-- <div class="col-md-2 col-12 text-center">
+          <div class="col-md-2 col-12 text-center">
             <div class="btn-group">
-              <button type="button" class="btn btn-secondary">View IFC</button>
+              <button type="button" class="btn btn-secondary" onclick="viewIfcClicked()" data-toggle="tooltip" data-placement="top" title="implemented using IFC.js">View IFC</button>
               <button type="button" role="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
               </button>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <li><a class="dropdown-item" href="#">Download IFC</a></li>
+                <li><a id="downloadIfcLinker" class="dropdown-item" data-toggle="tooltip" data-placement="top" title="IFCs viewed and downloaded here are merely examples and may not pass bSI validation service." target="_blank" href="https://thucbims.github.io/scantobim/data/officebuilding1.ifc">Download IFC</a></li>
               </ul>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
 		<script type="application/javascript">
+      function viewIfcClicked() {
+				sel_model = document.getElementById("select_model");
+				idx_model = sel_model.selectedIndex;
+				if (sel_model.selectedIndex == 0)
+        {
+					idx_model = 1;
+        }
+        viewIfcHref = "https://thucbims.github.io/scantobim/ifcjs/index.html?ifcfileid=33C2CE5B";
+				if (idx_model == 1)
+        {
+          viewIfcHref = "https://thucbims.github.io/scantobim/ifcjs/index.html?ifcfileid=33C2CE5B";
+        }
+				else if (idx_model == 2)
+        {
+				  viewIfcHref = "https://thucbims.github.io/scantobim/ifcjs/index.html?ifcfileid=6B19EC44";
+        }
+				else if (idx_model == 3)
+        {
+				  viewIfcHref = "https://thucbims.github.io/scantobim/ifcjs/index.html?ifcfileid=A810514B";
+        }
+				else if (idx_model == 4)
+        {
+				  viewIfcHref = "https://thucbims.github.io/scantobim/ifcjs/index.html?ifcfileid=1765CB46";
+        }
+				else if (idx_model == 5)
+        {
+          viewIfcHref = "https://thucbims.github.io/scantobim/ifcjs/index.html?ifcfileid=633788DC";
+        }
+        window.open(viewIfcHref, "_blank");
+      }
 			function selection_changed() {
 				result_url = "./subpage/";
 				sel_model = document.getElementById("select_model");
@@ -120,6 +151,27 @@
         {
 					idx_model = 1;
           sel_model.selectedIndex = 1;
+        }
+				downloadIfcLinker = document.getElementById("downloadIfcLinker");
+				if (sel_model.selectedIndex == 1)
+        {
+          downloadIfcLinker.href = "https://thucbims.github.io/scantobim/data/officebuilding1.ifc";
+        }
+				else if (sel_model.selectedIndex == 2)
+        {
+          downloadIfcLinker.href = "https://thucbims.github.io/scantobim/data/parkinglot1.ifc";
+        }
+				else if (sel_model.selectedIndex == 3)
+        {
+          downloadIfcLinker.href = "https://thucbims.github.io/scantobim/data/school1.ifc";
+        }
+				else if (sel_model.selectedIndex == 4)
+        {
+          downloadIfcLinker.href = "https://thucbims.github.io/scantobim/data/officebuilding2.ifc";
+        }
+				else if (sel_model.selectedIndex == 5)
+        {
+          downloadIfcLinker.href = "https://thucbims.github.io/scantobim/data/residence1.ifc";
         }
 				sel_left = document.getElementById("select_left");
 				idx_left = sel_left.selectedIndex;
@@ -160,7 +212,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12 text-center">
-			<iframe id="page_versus" style="width: 70vw;height: 70vh;position: relative;" src="subpage/model1left1right2.html" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+			<iframe id="page_versus" style="width: 73vw;height: 73vh;position: relative;" src="subpage/model1left1right2.html" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
           </div>
         </div>
       </div>
@@ -169,7 +221,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <p>Copyright © CBIMS Research Group. All rights reserved.</p>
+            <p style="width: 72vw;height: 1vh;position: relative;">Copyright © CBIMS Research Group. All rights reserved.</p>
           </div>
         </div>
       </div>
